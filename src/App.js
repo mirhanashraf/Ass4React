@@ -1,28 +1,37 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
 import './App.css';
 
+import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
+import { Switch } from 'react-router';
+
+import CreateUser from '../src/components/CreateUser/CreateUser';
+import AllUsers from '../src/components/AllUsers';
+import sendMsg from '../src/components/sendMsg';
+import Inbox from './components/inbox';
+import Sent from './components/Sent';
+import Register from './components/Register';
+
 class App extends Component {
-  render() {
-    return (
-      <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <p>
-            Edit <code>src/App.js</code> and save to reload.
-          </p>
-          <a
-            className="App-link"
-            href="https://reactjs.org"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Learn React
-          </a>
-        </header>
-      </div>
-    );
+  render(){
+    return(
+      <>
+      <Router>
+        <>
+      {/* <CreateUser/> */}
+      <Switch>
+      <Route exact path="/login" component={CreateUser} />  
+      <Route exact path="/" component={CreateUser} /> 
+      <Route exact path="/api/users/" component={AllUsers} />
+      <Route exact path="/api/sendMessage" component={sendMsg} />
+      <Route exact path="/api/Inbox/:id" component={Inbox} />
+      <Route exact path="/api/Sent/:id" component={Sent} />
+      <Route exact path="/Register" component={Register} />
+      </Switch>
+      </>
+      </Router>
+     </>
+
+    )
   }
 }
-
 export default App;
